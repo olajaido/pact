@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { usePactStream } from '@/hooks/usePactStream'
 import { FulfilButton } from '@/components/pact/FulfilButton'
 import { ExecutionBanner } from '@/components/pact/ExecutionBanner'
-import { SidebarLayout } from '@/components/navigation/SidebarLayout'
 import type { PactDetail } from '@/lib/db/queries/pacts'
 import type { PactSSEEvent } from '@/lib/sse-types'
 import type { Pact, Party, Condition, AuditLogEntry } from '@/lib/db/schema'
@@ -96,7 +95,7 @@ export function PactDetailClient({ pactId, initialData }: Props) {
     : '#c8c6c5'
 
   return (
-    <SidebarLayout>
+    <>
       <ExecutionBanner visible={state.pact.status === 'EXECUTED'} executedAt={state.pact.executedAt} />
 
       <main
@@ -346,6 +345,6 @@ export function PactDetailClient({ pactId, initialData }: Props) {
           </div>
         </div>
       </main>
-    </SidebarLayout>
+    </>
   )
 }

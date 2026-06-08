@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { getPactById } from '@/lib/db/queries/pacts'
 import { notFound, redirect } from 'next/navigation'
 import { PactDetailClient } from '@/components/pact/PactDetailClient'
+import { SidebarLayout } from '@/components/navigation/SidebarLayout'
 
 export default async function PactDetailPage({
   params,
@@ -17,16 +18,22 @@ export default async function PactDetailPage({
 
   if (!data.currentParty) {
     return (
-      <main
-        className="flex items-center justify-center min-h-screen"
-        style={{ background: '#0A0A0A' }}
-      >
-        <p className="text-on-surface-variant">You are not a party to this Pact.</p>
-      </main>
+      <SidebarLayout>
+        <div
+          className="flex items-center justify-center min-h-screen"
+          style={{ background: '#0A0A0A' }}
+        >
+          <p className="text-on-surface-variant">You are not a party to this Pact.</p>
+        </div>
+      </SidebarLayout>
     )
   }
 
+  // SidebarLayout is a Server Component — safe to use here.
+  // PactDetailClient is a Client Component — cannot import SidebarLayout itself.
   return (
-    <PactDetailClient pactId={id} initialData={data} currentUserId={session.user.id} />
+    <SidebarLayout>
+      <PactDetailClient pactId={id} initialData={data} currentUserId={session.user.id} />
+    </SidebarLayout>
   )
 }
