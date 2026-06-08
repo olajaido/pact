@@ -14,7 +14,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Resend({
       apiKey: process.env.AUTH_RESEND_KEY,
-      from: 'onboarding@resend.dev',
+      from:
+        process.env.NODE_ENV === 'production'
+          ? 'noreply@usepact.app'
+          : 'onboarding@resend.dev',
     }),
   ],
   pages: {
