@@ -1,5 +1,6 @@
 import { auth } from '@/auth'
 import { submitPact } from '@/lib/db/queries/pacts'
+import { sendInviteEmails } from '@/lib/email/send'
 import { AppError } from '@/lib/errors'
 
 export async function POST(
@@ -15,6 +16,10 @@ export async function POST(
 
   try {
     const pact = await submitPact(pactId, session.user.id, session.user.name ?? null)
+
+    // Fire invite emails after DB commit — non-blocking, best-effort
+    void sendInviteEmails(pactId).catch(console.error)
+
     return Response.json({ pact })
   } catch (err) {
     if (err instanceof AppError) {
