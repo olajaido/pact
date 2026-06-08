@@ -42,6 +42,11 @@ next-env.d.ts
 .env.local
 CLAUDE.local.md
 
-# Claude Code — local AI tooling, not part of the project
+# AI tooling — not part of the project
 .claude/
 docs/superpowers/
+skills-lock.json
+CLAUDE.md
+AGENTS.md
+stitch_pact_web_redesign/
+PACT_PRD_latest.md
