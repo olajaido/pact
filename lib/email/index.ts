@@ -5,4 +5,5 @@ export const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null
 
-export const FROM_ADDRESS = 'noreply@usepact.app'
+// Using Resend's test address — replace with verified domain address before production
+export const FROM_ADDRESS = 'onboarding@resend.dev'
