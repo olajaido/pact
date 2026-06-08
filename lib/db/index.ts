@@ -7,9 +7,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 // max:1 — Vercel serverless: one connection per function instance.
-// ssl:'require' — Aurora DSQL endpoints enforce TLS.
+// ssl:'verify-full' — verifies the server certificate against the system trust store
+// (which includes AWS CA certs on Vercel). Prevents MITM against Aurora DSQL.
 const client = postgres(process.env.DATABASE_URL, {
-  ssl: 'require',
+  ssl: 'verify-full',
   max: 1,
   idle_timeout: 20,
   connect_timeout: 10,
