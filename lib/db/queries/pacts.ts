@@ -226,7 +226,15 @@ export async function listPactsForUser(userId: string, status?: string) {
     .where(status ? eq(pacts.status, status) : undefined)
     .orderBy(desc(pacts.updatedAt))
 
-  return rows.map((r) => r.pact)
+  // Deduplicate in case the user is multiple parties on the same pact
+  const seen = new Set<string>()
+  return rows
+    .filter((r) => {
+      if (seen.has(r.pact.id)) return false
+      seen.add(r.pact.id)
+      return true
+    })
+    .map((r) => r.pact)
 }
 
 // ─── acceptParty ─────────────────────────────────────────────
@@ -331,7 +339,17 @@ export async function listPactsWithSummary(
 
   if (pactRows.length === 0) return []
 
-  const pactList = pactRows.map((r) => r.pact)
+  // Deduplicate — a user who is both creator and counterparty of the same pact
+  // will appear in two party rows, causing the join to return the pact twice.
+  const seen = new Set<string>()
+  const pactList = pactRows
+    .filter((r) => {
+      if (seen.has(r.pact.id)) return false
+      seen.add(r.pact.id)
+      return true
+    })
+    .map((r) => r.pact)
+
   const pactIds = pactList.map((p) => p.id)
 
   const [allParties, condCounts] = await Promise.all([
