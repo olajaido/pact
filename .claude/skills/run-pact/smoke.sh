@@ -59,9 +59,9 @@ check() {
   echo "PASS [${label}]: HTTP ${actual} ${url}"
 }
 
-check "home"       "${BASE}/"           200  "To get started"
-check "dashboard"  "${BASE}/dashboard"  404
-check "pacts"      "${BASE}/pacts"      404
+check "home"                "${BASE}/"           200  "Commitments"
+check "dashboard_redirect"  "${BASE}/dashboard"  307
+check "sign-in"             "${BASE}/sign-in"    200  "Pact"
 
 echo ""
 echo "All smoke tests passed."
