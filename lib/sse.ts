@@ -18,7 +18,9 @@ export async function broadcastPactEvent(
   if (!kvConfigured()) return
   try {
     const key = eventsKey(pactId)
-    await kv.rpush(key, JSON.stringify(event))
+    // Pass the object directly — @vercel/kv (Upstash) serializes/deserializes JSON automatically.
+    // Do NOT call JSON.stringify here; doing so causes double-serialization and a parse error on read.
+    await kv.rpush(key, event as unknown as string)
     await kv.expire(key, TTL_SECONDS)
   } catch (err) {
     console.error('[SSE] broadcast error:', err)
@@ -33,8 +35,9 @@ export async function getPactEventsSince(
   if (!kvConfigured()) return { events: [], nextIndex: fromIndex }
   try {
     const key = eventsKey(pactId)
-    const items = await kv.lrange<string>(key, fromIndex, -1)
-    const events = (items ?? []).map((item) => JSON.parse(item) as PactSSEEvent)
+    // @vercel/kv returns already-parsed objects — no JSON.parse needed.
+    const items = await kv.lrange<PactSSEEvent>(key, fromIndex, -1)
+    const events = items ?? []
     return { events, nextIndex: fromIndex + events.length }
   } catch (err) {
     console.error('[SSE] poll error:', err)
