@@ -6,7 +6,7 @@ import {
   conditions,
   auditLog,
 } from '@/lib/db/schema'
-import { eq, and, desc, asc, sql } from 'drizzle-orm'
+import { eq, and, desc, asc, sql, inArray } from 'drizzle-orm'
 import { withDsqlRetry } from '@/lib/dsql-retry'
 import { writeAuditInTx } from '@/lib/audit'
 import { AppError } from '@/lib/errors'
@@ -304,4 +304,79 @@ export async function acceptParty(
       }
     }),
   )
+}
+
+// ─── listPactsWithSummary ────────────────────────────────────
+
+export interface PactSummary {
+  pact: Pact
+  parties: Array<Pick<Party, 'id' | 'displayName' | 'email' | 'userId'>>
+  conditionTotal: number
+  conditionFulfilled: number
+}
+
+export async function listPactsWithSummary(
+  userId: string,
+  status?: string,
+): Promise<PactSummary[]> {
+  const pactRows = await db
+    .select({ pact: pacts })
+    .from(pacts)
+    .innerJoin(
+      parties,
+      and(eq(parties.pactId, pacts.id), eq(parties.userId, userId)),
+    )
+    .where(status ? eq(pacts.status, status) : undefined)
+    .orderBy(desc(pacts.updatedAt))
+
+  if (pactRows.length === 0) return []
+
+  const pactList = pactRows.map((r) => r.pact)
+  const pactIds = pactList.map((p) => p.id)
+
+  const [allParties, condCounts] = await Promise.all([
+    db
+      .select({
+        id: parties.id,
+        pactId: parties.pactId,
+        displayName: parties.displayName,
+        email: parties.email,
+        userId: parties.userId,
+      })
+      .from(parties)
+      .where(inArray(parties.pactId, pactIds)),
+
+    db
+      .select({
+        pactId: conditions.pactId,
+        total: sql<number>`count(*)::int`,
+        fulfilled:
+          sql<number>`sum(case when ${conditions.status} = 'FULFILLED' then 1 else 0 end)::int`,
+      })
+      .from(conditions)
+      .where(inArray(conditions.pactId, pactIds))
+      .groupBy(conditions.pactId),
+  ])
+
+  const partiesByPact = new Map<
+    string,
+    Array<Pick<Party, 'id' | 'displayName' | 'email' | 'userId'>>
+  >()
+  for (const p of allParties) {
+    const arr = partiesByPact.get(p.pactId) ?? []
+    arr.push(p)
+    partiesByPact.set(p.pactId, arr)
+  }
+
+  const countsByPact = new Map(condCounts.map((c) => [c.pactId, c]))
+
+  return pactList.map((pact) => {
+    const counts = countsByPact.get(pact.id) ?? { total: 0, fulfilled: 0 }
+    return {
+      pact,
+      parties: partiesByPact.get(pact.id) ?? [],
+      conditionTotal: counts.total,
+      conditionFulfilled: counts.fulfilled,
+    }
+  })
 }
