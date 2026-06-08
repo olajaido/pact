@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 .env.local
 CLAUDE.local.md
+
+# Claude Code — local AI tooling, not part of the project
+.claude/
+docs/superpowers/

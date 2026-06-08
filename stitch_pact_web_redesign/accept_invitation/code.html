@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Counterparty Acceptance - Pact</title>
+<script type='text/javascript' nonce='8ZDfRfYX/rW1KDqrrHu/5A==' src='https://contribution.usercontent.google.com/vQg0RNXoEKMSCGua3KDTwWJQrwKIg7azitGtY8enIojAHeumYrpdX9yop4hBn7SLlTK0cq9c0HXujvFIXYFQBFHCrYuJ-v7BpYz_zSe7QQbubPs8bXTM0-HKWLWCwYVOaSq-_iw8kyr6HqVgMsL5uO8CYLgciTN6OCjUk8ng-YWhIkf8PDMsv9oSHlvOy6LvrH4RHAP7NWyLNZlXWViTlBJwzADfCjlwQgFgixRIs3U5oSXkDi95vYO3jzgfhWVAfiAMLflLtOdYbDmC6fvwDQu0WOWEh-MqHXeYrixD-Ncyt1N9O2FNBuaV1KLaZUvPaNVJKpohy5wTn_zBKZczSuIJYUNRKpz6W0i-3I_ms6MxJpMQQgzx60GatkvylErmUZZ2oQORFQxRDlc7y4FyWbvJIFdMJSRacn4BFsqmEy158v4b-N0UoVWRLaMzjDa15KHqBpg8rwdZdEl9Y2l4w2xCZ-Ukeyy-ERyoaIQryOYxEPJW89tF7i4nZ3LMFMGSX1zsWCkx0D29ONf0-YstaHpgh0ys2PvND6-FUREGPJv84WH2HgIgtOgjJGg3jcURPjd_DuieKLElyuYLk5SSHQrF0kqdh6q2hsZw8Vylp-x3LjhSFEI6ZQoan2zf7d8pMPYNxmZxCKnJYZ6I6kG0l-cbch7AMc1pkMneLJqIf67UKRqqmtdchopubvneoIcUnWVp63M2VAqYcQ7Y-PIoOhZD4vY5gqBBriLZbSOSdNtFAVwgNUvAIz-4FoGvtnVKo6D8m0mYXmdB7QBosSV-DZ6wI4whYLKGwR4E7w'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#2f3037",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-primary-fixed": "#161e00",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-tint": "#abd600",
+                        "on-primary": "#283500",
+                        "tertiary-container": "#e2e1eb",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c8c6c5",
+                        "primary": "#ffffff",
+                        "on-secondary": "#313030",
+                        "outline-variant": "#444933",
+                        "on-primary-container": "#556d00",
+                        "primary-fixed-dim": "#abd600",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-variant": "#353534",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#e2e1eb",
+                        "secondary-container": "#474746",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface": "#131313",
+                        "on-surface-variant": "#c4c9ac",
+                        "inverse-primary": "#506600",
+                        "tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#45464e",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#c3f400",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1b22",
+                        "on-tertiary-container": "#63646c",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "outline": "#8e9379",
+                        "tertiary-fixed-dim": "#c6c6cf",
+                        "error-container": "#93000a",
+                        "surface-bright": "#3a3939",
+                        "primary-container": "#c3f400",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#474746",
+                        "neon-lime": "#ccff00" // Adding the requested specific hex just in case, though primary-fixed/surface-tint are similar
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A; /* Deep ink black */
+            color: #e5e2e1;
+        }
+        .tonal-level-1 { background-color: #141414; }
+        .tonal-level-2 { background-color: #1C1C1C; border: 1px solid #262626; }
+        
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(204, 255, 0, 0.1);
+            border-color: #ccff00;
+        }
+        
+        .btn-primary {
+            background-color: #ccff00;
+            color: #0A0A0A;
+            font-weight: 600;
+        }
+        .btn-secondary {
+            border: 1px solid #52525B;
+            color: #ffffff;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Suppressed navigation as this is a linear/transactional screen -->
+<main class="w-full max-w-4xl mx-auto flex flex-col gap-stack-lg">
+<!-- Header -->
+<header class="text-center flex flex-col items-center gap-stack-sm mb-stack-lg">
+<div class="flex items-center gap-2 text-surface-tint mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &#39;FILL&#39; 1;">security</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Secure Invitation</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+                Service Level Agreement: Aurora DSQL Node Deployment
+            </h1>
+</header>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Details -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- Invitation Summary -->
+<section class="tonal-level-1 rounded-xl p-stack-lg glow-hover transition-all">
+<p class="font-body-lg text-body-lg text-on-surface">
+                        You have been invited by <span class="font-bold text-primary">Aurora Infrastructures</span> to commit to this Pact. Review the terms below before executing your cryptographic signature.
+                    </p>
+</section>
+<!-- The Deal (Obligations) -->
+<section class="tonal-level-1 rounded-xl p-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+<span class="text-surface-tint font-mono text-sm">01</span> The Deal
+                    </h2>
+<ul class="flex flex-col gap-stack-md">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-surface-tint mt-1">check_circle</span>
+<div>
+<h3 class="font-bold text-primary">99.9% Uptime Guarantee</h3>
+<p class="text-on-surface-variant mt-1">Validator nodes must maintain continuous operation with minimal allowed downtime per quarter.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-surface-tint mt-1">check_circle</span>
+<div>
+<h3 class="font-bold text-primary">Data Sovereignty Compliance</h3>
+<p class="text-on-surface-variant mt-1">All processed data must strictly adhere to regional storage mandates defined in the core protocol.</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- The Trigger -->
+<section class="tonal-level-2 rounded-xl p-stack-lg border-l-4 border-l-surface-tint relative overflow-hidden">
+<!-- Subtle background glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-surface-tint opacity-5 rounded-full blur-2xl -mr-16 -mt-16"></div>
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2 relative z-10">
+<span class="text-surface-tint font-mono text-sm">02</span> The Trigger
+                    </h2>
+<div class="flex items-center gap-4 bg-[#141414] p-stack-md rounded-lg relative z-10">
+<div class="bg-surface-tint/10 p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: &#39;FILL&#39; 1;">bolt</span>
+</div>
+<div>
+<p class="font-bold text-primary">Outcome: Automatic Execution</p>
+<p class="text-on-surface-variant mt-1">Automatic payment release and node activation upon 24h verification.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Context & Actions -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- The Parties -->
+<section class="tonal-level-1 rounded-xl p-stack-md">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant mb-stack-md">THE PARTIES</h3>
+<div class="flex flex-col gap-stack-md">
+<!-- Orchestrator -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-surface-tint">
+<img alt="Aurora Infrastructures Logo" class="w-full h-full object-cover" data-alt="A minimalist, highly abstract corporate logo for a futuristic infrastructure company. The logo features sharp geometric shapes in deep black and electric lime green. It is set against a dark background with subtle high-contrast lighting. The style is modern, sleek, and authoritative, suitable for a dark mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWxmw-CLyuLiWnT6bcVWImROMLM0qZLh9xTZj7Zjgp_cjvEgfRHpVS7CURAMXc_Uj0V6bRL14J2B6pNCFCp5BljXz7KnHHc5EZWffejyh79XrsXFSNTJJdQGOAsxkhpF2wrsSlJsaZtfUVo09YrKfes5WpSe6kd9S49srzvMTvdjZmSQJJbblk3guq3vpU0DHLGQ7kPMXMxGrXseZRW3Gy5y9BDICSfmFwFmQmap5sF-RqAnuXg6hn9bB3vE1FluOnZqxawHfbgQk"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-surface-tint">ORCHESTRATOR</p>
+<p class="font-bold text-primary">Aurora Infra.</p>
+</div>
+</div>
+<!-- Connection Line -->
+<div class="pl-5 border-l border-dashed border-outline-variant h-4 ml-0.5"></div>
+<!-- Validator (You) -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">VALIDATOR</p>
+<p class="font-bold text-primary">You</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Bar -->
+<section class="tonal-level-1 rounded-xl p-stack-md flex flex-col gap-stack-sm sticky top-stack-md">
+<button class="btn-primary w-full py-4 rounded-full flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: &#39;FILL&#39; 1;">verified_user</span>
+                        Verify &amp; Commit
+                    </button>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="btn-secondary py-2 rounded-lg text-sm flex justify-center items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                            Review
+                        </button>
+<button class="btn-secondary py-2 rounded-lg text-sm flex justify-center items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+                            Request Edit
+                        </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pact | User Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Playfair Display & Hanken Grotesk -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script type='text/javascript' nonce='g6ICgjKXb5WsU9RAasMQJA==' src='https://contribution.usercontent.google.com/GxNDMTr2XxIUSiRecludZ9ahExpyGcLj44ZnkvJpHxL3GqzX_5KrR_uKIOXT-5VsFWyhZ9wbj_XIB1eCtYuG1rjxcx3Jq4eAJJpCGJaA2VV7XEd62jtWSaW79rU1kzYrsCsNhFuv0N9V9hNST0OkXSCFm-OSmVeMG8gEvR4wz6dXEoJ0whf96p8T4yiWfFGyWg52na0e6Na7DJHrY6AbV14P8v2vh9ras6Jx_xJkgQTegdSWCJfo7xHN078y3jm9ZNfbx5FS9VhkiRD3mj1QkD9gGU0GHTq7Kr7mjRmlBgG-MIqV6o0PKuqPBFe10JsT4E14Dnq5nSBuWFgr43EVnQFx154BVOqWh7JTj0AZyKB2fzyX3eEsalxkz_HXBnkEBm-4YCTOi6uizZ8HSD5SHIYbdVWDb43EPytOx6PaaN5-wb3m222QRTXYdKkl9ukqP32yQHjd2HficaOJHeONUrMsQAtWkGzHseuJcN4HEtm6rTlif-_vHz1xs8GcrBLfMhVPK83pk8HZZ7ASkrz8IzNvRgSDKsN19FSuxDXDvk0BbBibxkaQuDQwtE8ho26kB8I6G51LyMPY3X-bevG0A5Ibrk0wjuv5Wt9l6XpHbz0iTCkX78MvQxwUI4EzwEBbCYfzFe98eC1Uc9rL-UQHswgj2UyQugc5IwIwO-xY_k06rgwpX1sUt9j51fdrF2MIfhKjS3lk5dgo1ICzN_si42BSS_tBKI32LOQ_bxilLwPpQtSD2GDUqIv3XlU8qBTLiOKMtAwizErV6wO77KL44qaUxKSh3zafsHVntA'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#45464e",
+                    "on-secondary-fixed-variant": "#474746",
+                    "inverse-on-surface": "#313030",
+                    "tertiary": "#ffffff",
+                    "surface-bright": "#3a3939",
+                    "surface": "#131313",
+                    "outline-variant": "#444933",
+                    "primary-fixed-dim": "#abd600",
+                    "tertiary-fixed": "#e2e1eb",
+                    "surface-variant": "#353534",
+                    "outline": "#8e9379",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed-variant": "#3c4d00",
+                    "surface-container": "#201f1f",
+                    "surface-dim": "#131313",
+                    "on-primary": "#283500",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-background": "#e5e2e1",
+                    "on-tertiary": "#2f3037",
+                    "error-container": "#93000a",
+                    "background": "#131313",
+                    "on-primary-fixed": "#161e00",
+                    "inverse-surface": "#e5e2e1",
+                    "primary": "#ffffff",
+                    "on-surface-variant": "#c4c9ac",
+                    "surface-tint": "#abd600",
+                    "on-tertiary-fixed": "#1a1b22",
+                    "tertiary-container": "#e2e1eb",
+                    "secondary-container": "#474746",
+                    "on-secondary": "#313030",
+                    "on-tertiary-container": "#63646c",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed": "#c3f400",
+                    "secondary": "#c8c6c5",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-container": "#556d00",
+                    "primary-container": "#c3f400",
+                    "surface-container-high": "#2a2a2a",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "inverse-primary": "#506600",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c6c6cf",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "section-gap": "120px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Playfair Display"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-xl": ["Playfair Display"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-glow:hover {
+            box-shadow: 0px 0px 15px rgba(204, 255, 0, 0.15);
+        }
+        /* Custom scrollbar for refined UI */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 2px; }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- Shell Layout -->
+<div class="flex h-screen w-full bg-surface-container-lowest">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-surface-container dark:bg-surface-container p-stack-md z-50">
+<!-- Brand Section -->
+<div class="mb-stack-lg px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Pact Protocol</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-60 tracking-widest mt-1">VERIFIED LEGAL NODE</p>
+</div>
+<!-- Profile Info -->
+<div class="flex items-center gap-3 px-2 mb-stack-lg">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOc3EuPhB2OfXbGzDnuXfwMwZCDwfc2qh4dQI6w9A3lLg1SiAYLnTow2w9JVeop2D6fA7GDtTPARK_VS6teEOm8tW_Di_xS0ajKPG7eTAIbeeJDVUPw0Zwa4uMUG6p_Jrart4ZGCVEyTKigpYzL7GeC8DrpNE4dWRzyfwzIWZHhHKhP_NksVqYwxPbHAsgtCD34lcc5xXLRVcG9cxxEI-mgbvaZaxaoTvGdrWIueXMf-4S8JK3prbJ9h7LIX01qr0FCEgQcutMbZ4"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-bold">Node 7421</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Status: Synchronized</p>
+</div>
+</div>
+<!-- Primary Navigation -->
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary-fixed font-bold bg-surface-container-highest/50 rounded-lg group scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &#39;FILL&#39; 1;">description</span>
+<span class="font-label-sm text-label-sm">My Pacts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">hub</span>
+<span class="font-label-sm text-label-sm">Network</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">history_edu</span>
+<span class="font-label-sm text-label-sm">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="mt-auto px-2 mb-stack-md">
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-bold py-3 rounded-full flex items-center justify-center gap-2 custom-glow transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-label-sm text-label-sm">New Pact</span>
+</button>
+</div>
+<!-- Footer Navigation -->
+<div class="border-t border-outline-variant/30 pt-stack-md space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-error transition-colors">logout</span>
+<span class="font-label-sm text-label-sm">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 overflow-y-auto min-h-screen">
+<!-- Top Bar -->
+<header class="flex justify-between items-center w-full px-margin-desktop py-stack-md max-w-container-max mx-auto bg-surface/80 backdrop-blur-md sticky top-0 z-40">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Your Pacts</h2>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-primary-fixed text-on-primary-fixed font-bold px-6 py-2.5 rounded-full font-label-sm text-label-sm custom-glow active:scale-95 transition-all">
+                        + New Pact
+                    </button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Filter Tabs -->
+<div class="flex items-center gap-2 mb-stack-lg border-b border-outline-variant/20 pb-4">
+<button class="px-6 py-2 rounded-full bg-primary-fixed text-on-primary-fixed font-bold font-label-sm text-label-sm transition-all active:scale-95">
+                        All
+                    </button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">
+                        Active
+                    </button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">
+                        Pending
+                    </button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">
+                        Executed
+                    </button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">
+                        Voided
+                    </button>
+</div>
+<!-- Empty State Content -->
+<div class="flex flex-col items-center justify-center min-h-[614px] text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+<div class="relative w-64 h-64 mb-stack-lg">
+<!-- Abstract Visual Placeholder -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-fixed/20 to-transparent rounded-full blur-3xl opacity-30 animate-pulse"></div>
+<div class="relative flex items-center justify-center h-full">
+<span class="material-symbols-outlined text-[120px] text-surface-container-highest select-none" style="font-variation-settings: &#39;wght&#39; 100;">description</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">You have no pacts yet.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto mb-stack-lg opacity-80">
+                        Create your first cryptographically secured legal commitment and start building your trust network today.
+                    </p>
+<button class="group relative bg-primary-fixed text-on-primary-fixed font-bold px-10 py-4 rounded-full custom-glow transition-all active:scale-95">
+<span class="font-label-sm text-label-sm">Create your first Pact</span>
+<span class="absolute right-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">→</span>
+</button>
+<!-- Feature Teaser Grid (Bento style hint) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mt-section-gap w-full max-w-4xl text-left">
+<div class="p-stack-md bg-surface-container border border-outline-variant/10 rounded-xl hover:border-outline-variant/30 transition-all">
+<span class="material-symbols-outlined text-primary-fixed mb-2" style="font-variation-settings: &#39;FILL&#39; 1;">security</span>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1">SECURE EXECUTION</h4>
+<p class="text-[13px] text-on-surface-variant">Multi-sig validation for all contractual obligations.</p>
+</div>
+<div class="p-stack-md bg-surface-container border border-outline-variant/10 rounded-xl hover:border-outline-variant/30 transition-all">
+<span class="material-symbols-outlined text-primary-fixed mb-2" style="font-variation-settings: &#39;FILL&#39; 1;">bolt</span>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1">AUTO-SETTLEMENT</h4>
+<p class="text-[13px] text-on-surface-variant">Funds are released instantly upon proof of delivery.</p>
+</div>
+<div class="p-stack-md bg-surface-container border border-outline-variant/10 rounded-xl hover:border-outline-variant/30 transition-all">
+<span class="material-symbols-outlined text-primary-fixed mb-2" style="font-variation-settings: &#39;FILL&#39; 1;">gavel</span>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1">LEGAL COMPLIANCE</h4>
+<p class="text-[13px] text-on-surface-variant">Templates designed by top-tier legal experts.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="mt-auto border-t border-secondary-container">
+<div class="flex justify-between items-center w-full px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+<p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2024 Pact Protocol. Built on Aurora DSQL.</p>
+<div class="flex gap-gutter">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Terms</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">API Documentation</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Network Status</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle Tab Selection Visuals
+            const tabs = document.querySelectorAll('button.font-label-sm');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    if (tab.innerText === 'Create your first Pact' || tab.innerText === '+ New Pact') return;
+                    
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-primary-fixed', 'text-on-primary-fixed', 'font-bold');
+                        t.classList.add('text-on-surface-variant');
+                    });
+                    
+                    tab.classList.remove('text-on-surface-variant');
+                    tab.classList.add('bg-primary-fixed', 'text-on-primary-fixed', 'font-bold');
+                });
+            });
+
+            // Smooth entrance for content
+            const mainContent = document.querySelector('main');
+            mainContent.style.opacity = '0';
+            setTimeout(() => {
+                mainContent.style.transition = 'opacity 0.6s ease-out';
+                mainContent.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body></html>

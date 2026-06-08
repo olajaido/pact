@@ -20,15 +20,18 @@ export default function LandingPage() {
             Pact
           </div>
           <div className="hidden md:flex gap-8 items-center">
-            {['Dashboard', 'Network'].map((item) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase()}`}
-                className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-200"
-              >
-                {item}
-              </Link>
-            ))}
+            <a
+              href="#how-it-works"
+              className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-200"
+            >
+              How it works
+            </a>
+            <a
+              href="#use-cases"
+              className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-200"
+            >
+              Use cases
+            </a>
           </div>
           <Link
             href="/sign-in"
@@ -89,6 +92,7 @@ export default function LandingPage() {
 
         {/* ── Use Cases ────────────────────────────────────── */}
         <section
+          id="use-cases"
           className="reveal-on-scroll mx-auto px-margin-mobile md:px-margin-desktop py-section-gap"
           style={{ maxWidth: 1280 }}
         >
@@ -147,6 +151,7 @@ export default function LandingPage() {
 
         {/* ── How it Works — Vertical Timeline ─────────────── */}
         <section
+          id="how-it-works"
           className="reveal-on-scroll mx-auto px-margin-mobile md:px-margin-desktop py-section-gap"
           style={{ maxWidth: 896 }}
         >
@@ -223,12 +228,15 @@ export default function LandingPage() {
               >
                 Create your first Pact
               </Link>
-              <button
+              <a
+                href="https://github.com/olajaido/pact"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border text-on-surface font-bold py-4 px-10 rounded-full font-body-md hover:bg-surface-container-highest active:scale-95 transition-all"
-                style={{ borderColor: '#8e9379' }}
+                style={{ borderColor: '#8e9379', textDecoration: 'none', display: 'inline-block' }}
               >
-                View Documentation
-              </button>
+                View on GitHub
+              </a>
             </div>
           </div>
         </section>
@@ -251,15 +259,9 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-8">
-              {['Privacy', 'Terms', 'API Documentation', 'Network Status'].map((l) => (
-                <a
-                  key={l}
-                  href="#"
-                  className="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors"
-                >
-                  {l}
-                </a>
-              ))}
+              <Link href="/privacy" className="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors">Privacy</Link>
+              <Link href="/terms" className="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors">Terms</Link>
+              <a href="https://github.com/olajaido/pact" target="_blank" rel="noopener noreferrer" className="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors">Documentation</a>
             </div>
           </div>
         </footer>

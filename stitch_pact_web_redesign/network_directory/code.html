@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Network | Pact Protocol</title>
+<script type='text/javascript' nonce='RFWX3DLvXO0dv36JGwkKLg==' src='https://contribution.usercontent.google.com/e4YsxCsIFLgd5y_szzttf2m84MSKcKnuM5k7qzCW1mCTbewSR4LCWD-VMWoipfaY_ZX_eI7tXehj2pTk4tLoIz5PqK35usIqIJu_UuDm7ue5SvVbNcyzBw8NZOtYaN9sVmcocppnTfjeZReIKMuU9Vu73gwgcP2C0aVNcDTu0sKqG-duSJpxA4W1OKrHfdK2Hh1Z2LM636IPevdVfLlRSrMJ08fWUWYpk3j4fj6kohR2bxWBM6AopL_qye33qUHvlIauy_B5lGdgfzWOYVyxKrRhA0WbwuICjU6EenzkeSC3dPdx3zaZVxidQyaGdM95AxsKFRGGq3fKQmX0logZIP5SiUTgSXFvilheTXpb1j78G4yJcekYlqFKalQG5bhybix5j8RPMu6CnYKZdtTP6YJmHGbdZGs1u31LzGg9gUfl7UCJzgIqUEruFQPNY_Ibs1fpmb-_7P4pSRtx2ADk4MZsG9tloy7yePDyprW2alfDo21k9lkUXw5fj37i76YKF0cd8HT_2P5m0bmq3jnMjM7YigARzPcrDOf2ifeHiX2GnOxEJ3hF_zoU3gDn4byvi-wT4uRpoPPH3DuK-W3JmEO1NDj9iD5QvP5cDAmFJUbEzLdjUkY56pOKaVnX4uP3qi2exqTHXJdtZPwnU6KRpRVTqCg1L_mvaIGetXoevBKSL1xkpHfPk3KVVIdWtV0AL3jap_rseyCGLu3LvazvLM6r1l44IWmWQ0LJEEfxYqvSMe-LM_uTXbojJnqmo09ROA0PYli51k3ng-YrqdtbWJV2iHpljbaeDgHxNQ'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-highest": "#353534",
+                "secondary-fixed": "#e5e2e1",
+                "on-tertiary-fixed-variant": "#45464e",
+                "on-secondary-fixed-variant": "#474746",
+                "inverse-on-surface": "#313030",
+                "tertiary": "#ffffff",
+                "surface-bright": "#3a3939",
+                "surface": "#131313",
+                "outline-variant": "#444933",
+                "primary-fixed-dim": "#abd600",
+                "tertiary-fixed": "#e2e1eb",
+                "surface-variant": "#353534",
+                "outline": "#8e9379",
+                "on-secondary-fixed": "#1c1b1b",
+                "on-primary-fixed-variant": "#3c4d00",
+                "surface-container": "#201f1f",
+                "surface-dim": "#131313",
+                "on-primary": "#283500",
+                "on-secondary-container": "#b7b5b4",
+                "on-background": "#e5e2e1",
+                "on-tertiary": "#2f3037",
+                "error-container": "#93000a",
+                "background": "#131313",
+                "on-primary-fixed": "#161e00",
+                "inverse-surface": "#e5e2e1",
+                "primary": "#ffffff",
+                "on-surface-variant": "#c4c9ac",
+                "surface-tint": "#abd600",
+                "on-tertiary-fixed": "#1a1b22",
+                "tertiary-container": "#e2e1eb",
+                "secondary-container": "#474746",
+                "on-secondary": "#313030",
+                "on-tertiary-container": "#63646c",
+                "surface-container-low": "#1c1b1b",
+                "primary-fixed": "#c3f400",
+                "secondary": "#c8c6c5",
+                "on-surface": "#e5e2e1",
+                "on-primary-container": "#556d00",
+                "primary-container": "#c3f400",
+                "surface-container-high": "#2a2a2a",
+                "error": "#ffb4ab",
+                "secondary-fixed-dim": "#c8c6c5",
+                "inverse-primary": "#506600",
+                "on-error-container": "#ffdad6",
+                "tertiary-fixed-dim": "#c6c6cf",
+                "on-error": "#690005"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "stack-lg": "32px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "gutter": "24px",
+                "margin-desktop": "64px",
+                "container-max": "1280px",
+                "section-gap": "120px",
+                "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Playfair Display"],
+                "body-lg": ["Hanken Grotesk"],
+                "headline-md": ["Playfair Display"],
+                "body-md": ["Hanken Grotesk"],
+                "headline-xl": ["Playfair Display"],
+                "label-sm": ["Hanken Grotesk"],
+                "headline-lg-mobile": ["Playfair Display"]
+            },
+            "fontSize": {
+                "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-hover:hover {
+            box-shadow: 0px 0px 15px rgba(204, 255, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container flex flex-col p-stack-md z-50 border-r border-outline-variant/20">
+<div class="mb-stack-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Pact Protocol</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70 uppercase tracking-widest mt-1">Verified Legal Node</p>
+</div>
+<button class="bg-primary-container text-on-primary-fixed font-bold py-stack-md rounded-full flex items-center justify-center gap-2 mb-stack-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+            New Pact
+        </button>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">description</span>
+<span class="font-label-sm text-label-sm">My Pacts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary-fixed font-bold bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-sm text-label-sm">Network</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">history_edu</span>
+<span class="font-label-sm text-label-sm">Audit Trail</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2 border-t border-outline-variant/20 pt-stack-md">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-fixed">logout</span>
+<span class="font-label-sm text-label-sm">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 min-h-screen">
+<!-- Top Bar -->
+<header class="flex justify-between items-center w-full px-margin-desktop py-stack-md max-w-container-max mx-auto">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Collaborator Network</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Verified entities and frequent partners on the protocol.</p>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container border-none border-b border-outline-variant focus:border-primary-fixed focus:ring-0 text-on-surface pl-10 pr-4 py-2 w-64 text-sm transition-all" placeholder="Search network..." type="text"/>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCouCjbCnXyqfETOki8XxddCeFkADl8V2AINN2ogyc1BBxKUv2uG6H12yybJAw0EHg8voS5GFwYg8DTIPPdDwmMcJzZy11COCmhi3i-h7iZUyy6ND_VXDQTFcEmn0zEuNoHVjKKQooH9bkOdvkQS7WqluVWBT-Vs0f-_7IzaMOdgPJc7YSv-JVsxQTonfxlUmqS4K5ytDSkpvJ1SqTsIzSQcPqfOi1uuvpE4fN0tLy9R_Y_8hYO8IGNmDbfbJf2ypYLMCXrJGaTBmE"/>
+</div>
+</div>
+</header>
+<!-- Network Grid -->
+<div class="px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-12 gap-gutter mb-section-gap">
+<div class="col-span-12 md:col-span-8 bg-surface-container p-stack-lg rounded-xl border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest">Network Pulse</span>
+<h3 class="font-headline-md text-headline-md mt-2">Protocol-wide Trust Efficiency</h3>
+</div>
+<div class="flex items-end justify-between mt-stack-lg">
+<div class="flex gap-stack-lg">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Nodes Connected</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">142</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Execution Rate</p>
+<p class="font-headline-lg text-headline-lg text-on-surface text-primary-fixed">99.2%</p>
+</div>
+</div>
+<div class="flex -space-x-3">
+<img alt="Node" class="w-10 h-10 rounded-full border-2 border-surface" data-alt="Close-up professional headshot of a female executive in a modern office, minimalist dark lighting, sharp focus on eyes, cool color tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb33QngZEO9gquOpMY7ePbpToX4OVhM_VRvpuwZWwrpxju2BJJ0WNC2WH812ZFKpmjFjqHIt4AUOuuCGehC_S955nQAzUGVIlKd8T-gT5ck_X4myxrlOve1iVthoYU2gZyzTQzXxRy4SgOWNTZIPg57tfN9TCPoD5C5186pOxHId8jMh9pHG71lFeJ_dJm5Z7ZKOT5MUS9BbR1FWBjQKpNAECLgvdO0ccIoEp4EkJG0CJzYhAmkZYHnlr8OaG93NPTOmXN8LW2Plo"/>
+<img alt="Node" class="w-10 h-10 rounded-full border-2 border-surface" data-alt="Professional studio portrait of a male tech founder against a dark background, dramatic side lighting, high-contrast black and white aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHckE_2FpczHhSvNngkIY7oV3q2933SA2NPblptfipBa0ngyCp8MfQcTBALS8mA68lHaf8hBj6UDoIaUiUd4v9WUiFc0lHC0L3IudT02L2MgEooQqOP1v-ZWB3kiF3lhVruXYmXIt9KkivhQGiD3MrqLLw3L8xhhflnrqryvA-yqZOr2BoH33OQ0ZAMUNlZ9P8WBPIsxv6gXo3CnpMRmnY3BENtzDwy_AI_dcY2ptUwKWqIjtc1XPl5u0Qb7jez8TnmUKoYK_Qm7Y"/>
+<img alt="Node" class="w-10 h-10 rounded-full border-2 border-surface" data-alt="Abstract corporate logo representing a modern financial entity, geometric shapes in electric lime and deep gray, glassmorphism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhQTQ4VnWeVAYxid6RLVvg9LQyZ-5zSBOrinUqjGVmojjmNLrnmm0_YEwWaEM7gUp2KmwrOjOptrJcpW2OQ4uOAEjpfxLmEDbxNwjkVA3sKBVZyiigxNtf8gDmIKNKqvQRaU8UetyANGHCsIZKIJCln1usLe8GMhVUFi2g-SXZ8QwAxoWrrlFjlEyr7p_AKaAjFRlv8WGPjgoeihn3PoSo1ByPS-2mxwQgU2Rt74ymeLi8uEadI_zB8QVhoA6HgyL_VRNaYt--xsM"/>
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center text-xs font-bold border-2 border-surface">+12</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-primary-container p-stack-lg rounded-xl flex flex-col justify-center text-on-primary-fixed text-center">
+<span class="material-symbols-outlined text-4xl mb-2">verified</span>
+<h4 class="font-headline-md text-headline-md">Identity Verified</h4>
+<p class="font-body-md text-body-md opacity-80 mt-2">Your node is fully compliant and visible to the high-stakes network.</p>
+</div>
+</div>
+<!-- Collaboration Directory -->
+<div class="flex items-center justify-between mb-stack-lg">
+<h3 class="font-headline-md text-headline-md">Trusted Entities</h3>
+<div class="flex gap-stack-sm">
+<button class="px-4 py-1 rounded-full border border-primary-fixed text-primary-fixed text-sm font-bold">All</button>
+<button class="px-4 py-1 rounded-full border border-outline-variant text-on-surface-variant text-sm hover:border-white transition-all">Vendors</button>
+<button class="px-4 py-1 rounded-full border border-outline-variant text-on-surface-variant text-sm hover:border-white transition-all">Partners</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container p-0 rounded-xl overflow-hidden border border-outline-variant/10 glow-hover transition-all group">
+<div class="p-stack-md flex items-start justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">business</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md leading-none">Lumina Corp</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 uppercase tracking-tighter">Strategic Partner</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary-fixed">98/100</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Trust Score</span>
+</div>
+</div>
+<div class="px-stack-md py-stack-sm border-t border-outline-variant/10 grid grid-cols-2">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Active Pacts</p>
+<p class="font-headline-md text-headline-md text-on-surface">12</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Fulfilled</p>
+<p class="font-headline-md text-headline-md text-on-surface">142</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md flex justify-between items-center group-hover:bg-surface-container-highest transition-colors">
+<span class="text-sm font-bold">Last activity: 2h ago</span>
+<a class="text-primary-fixed flex items-center gap-1 text-sm font-bold hover:underline" href="#">
+                            View Node <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container p-0 rounded-xl overflow-hidden border border-outline-variant/10 glow-hover transition-all group">
+<div class="p-stack-md flex items-start justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">person</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md leading-none">Sarah Chen</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 uppercase tracking-tighter">Expert Freelancer</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary-fixed">100/100</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Trust Score</span>
+</div>
+</div>
+<div class="px-stack-md py-stack-sm border-t border-outline-variant/10 grid grid-cols-2">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Active Pacts</p>
+<p class="font-headline-md text-headline-md text-on-surface">03</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Fulfilled</p>
+<p class="font-headline-md text-headline-md text-on-surface">24</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md flex justify-between items-center group-hover:bg-surface-container-highest transition-colors">
+<span class="text-sm font-bold">Last activity: yesterday</span>
+<a class="text-primary-fixed flex items-center gap-1 text-sm font-bold hover:underline" href="#">
+                            View Node <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container p-0 rounded-xl overflow-hidden border border-outline-variant/10 glow-hover transition-all group">
+<div class="p-stack-md flex items-start justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">account_balance</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md leading-none">Nexus Ledger</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 uppercase tracking-tighter">Certified Vendor</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary-fixed">92/100</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Trust Score</span>
+</div>
+</div>
+<div class="px-stack-md py-stack-sm border-t border-outline-variant/10 grid grid-cols-2">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Active Pacts</p>
+<p class="font-headline-md text-headline-md text-on-surface">08</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Fulfilled</p>
+<p class="font-headline-md text-headline-md text-on-surface">67</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md flex justify-between items-center group-hover:bg-surface-container-highest transition-colors">
+<span class="text-sm font-bold">Last activity: 5m ago</span>
+<a class="text-primary-fixed flex items-center gap-1 text-sm font-bold hover:underline" href="#">
+                            View Node <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container p-0 rounded-xl overflow-hidden border border-outline-variant/10 glow-hover transition-all group">
+<div class="p-stack-md flex items-start justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">token</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md leading-none">Apex Labs</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 uppercase tracking-tighter">Audit Node</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary-fixed">95/100</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Trust Score</span>
+</div>
+</div>
+<div class="px-stack-md py-stack-sm border-t border-outline-variant/10 grid grid-cols-2">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Audits Completed</p>
+<p class="font-headline-md text-headline-md text-on-surface">542</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase">Integrity</p>
+<p class="font-headline-md text-headline-md text-on-surface">100%</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md flex justify-between items-center group-hover:bg-surface-container-highest transition-colors">
+<span class="text-sm font-bold">Status: Online</span>
+<a class="text-primary-fixed flex items-center gap-1 text-sm font-bold hover:underline" href="#">
+                            View Node <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="w-full px-margin-desktop py-stack-lg max-w-container-max mx-auto mt-section-gap border-t border-outline-variant/10 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Pact</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">© 2024 Pact Protocol. Built on Aurora DSQL.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Terms</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">API Documentation</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Network Status</a>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.glow-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>
