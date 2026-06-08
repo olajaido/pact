@@ -1,11 +1,4 @@
-const AVATAR_COLORS = [
-  '#D4FF4F',
-  '#22C55E',
-  '#60A5FA',
-  '#F472B6',
-  '#A78BFA',
-  '#F59E0B',
-]
+const COLORS = ['#c3f400', '#22C55E', '#60A5FA', '#F472B6', '#A78BFA', '#F59E0B']
 
 function hashName(name: string): number {
   let h = 0
@@ -13,36 +6,26 @@ function hashName(name: string): number {
   return Math.abs(h)
 }
 
-function getAvatarColor(name: string): string {
-  return AVATAR_COLORS[hashName(name) % AVATAR_COLORS.length]
-}
-
-interface PartyAvatarProps {
-  name: string
-  size?: number
-}
+interface PartyAvatarProps { name: string; size?: number }
 
 export function PartyAvatar({ name, size = 32 }: PartyAvatarProps) {
   const initial = name.trim()[0]?.toUpperCase() ?? '?'
-  const bg = getAvatarColor(name)
-
+  const bg = COLORS[hashName(name) % COLORS.length]
   return (
     <div
+      title={name}
       style={{
-        width: size,
-        height: size,
+        width: size, height: size,
         borderRadius: '50%',
         background: bg,
-        color: '#0C0C0E',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        color: '#0A0A0A',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontWeight: 700,
         fontSize: size * 0.4,
         flexShrink: 0,
         userSelect: 'none',
+        fontFamily: "'Hanken Grotesk', sans-serif",
       }}
-      title={name}
     >
       {initial}
     </div>

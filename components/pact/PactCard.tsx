@@ -1,145 +1,90 @@
+import Link from 'next/link'
 import { PartyAvatar } from './PartyAvatar'
 import type { PactSummary } from '@/lib/db/queries/pacts'
 
-interface PactCardProps {
-  summary: PactSummary
-}
-
-export function PactCard({ summary }: PactCardProps) {
+export function PactCard({ summary }: { summary: PactSummary }) {
   const { pact, parties, conditionTotal, conditionFulfilled } = summary
 
   const statusColor =
-    pact.status === 'EXECUTED'
-      ? '#22C55E'
-      : pact.status === 'ACTIVE'
-        ? '#D4FF4F'
-        : pact.status === 'IN_DISPUTE'
-          ? '#F59E0B'
-          : '#6B7280'
+    pact.status === 'EXECUTED' ? '#c3f400'
+    : pact.status === 'ACTIVE' ? '#abd600'
+    : pact.status === 'IN_DISPUTE' ? '#F59E0B'
+    : '#c8c6c5'
 
-  const progressPct =
-    conditionTotal > 0
-      ? Math.round((conditionFulfilled / conditionTotal) * 100)
-      : 0
+  const statusBg =
+    pact.status === 'EXECUTED' ? 'rgba(195,244,0,0.12)'
+    : pact.status === 'ACTIVE' ? 'rgba(171,214,0,0.1)'
+    : pact.status === 'IN_DISPUTE' ? 'rgba(245,158,11,0.12)'
+    : 'rgba(200,198,197,0.08)'
+
+  const pct = conditionTotal > 0 ? Math.round((conditionFulfilled / conditionTotal) * 100) : 0
 
   return (
-    <a
-      href={`/pacts/${pact.id}`}
-      style={{ textDecoration: 'none', display: 'block' }}
-    >
+    <Link href={`/pacts/${pact.id}`} style={{ textDecoration: 'none', display: 'block' }}>
       <div
-        style={{
-          background: '#141416',
-          border: '1px solid #242428',
-          borderRadius: 8,
-          padding: 20,
-          cursor: 'pointer',
-        }}
+        className="rounded-xl p-stack-lg glow-hover transition-all border border-transparent hover:border-outline-variant"
+        style={{ background: '#201f1f', cursor: 'pointer' }}
       >
-        {/* Title + status */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            marginBottom: 12,
-            gap: 12,
-          }}
-        >
-          <h3
-            style={{
-              margin: 0,
-              color: '#F0EFE8',
-              fontSize: 15,
-              fontWeight: 600,
-              lineHeight: 1.3,
-            }}
-          >
-            {pact.title}
-          </h3>
+        {/* Status + date */}
+        <div className="flex items-center justify-between mb-3">
           <span
-            style={{
-              background: statusColor,
-              color: '#0C0C0E',
-              padding: '2px 8px',
-              borderRadius: 999,
-              fontSize: 11,
-              fontWeight: 700,
-              flexShrink: 0,
-            }}
+            className="font-label-sm text-label-sm rounded-full px-3 py-1"
+            style={{ color: statusColor, background: statusBg }}
           >
             {pact.status}
           </span>
+          <span className="font-label-sm text-label-sm text-on-surface-variant opacity-60">
+            {new Date(pact.updatedAt).toLocaleDateString()}
+          </span>
         </div>
 
-        {/* Party avatars */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 12 }}>
+        {/* Title */}
+        <h3
+          className="text-on-surface mb-stack-sm"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 18, fontWeight: 600, lineHeight: 1.3,
+          }}
+        >
+          {pact.title}
+        </h3>
+
+        {/* Avatars */}
+        <div className="flex gap-1 mb-stack-md">
           {parties.slice(0, 4).map((p) => (
-            <PartyAvatar
-              key={p.id}
-              name={p.displayName ?? p.email}
-              size={28}
-            />
+            <PartyAvatar key={p.id} name={p.displayName ?? p.email} size={28} />
           ))}
           {parties.length > 4 && (
             <div
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: '50%',
-                background: '#242428',
-                color: '#6B7280',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 11,
-                fontWeight: 700,
-                flexShrink: 0,
-              }}
+              className="flex items-center justify-center font-bold text-on-surface-variant"
+              style={{ width: 28, height: 28, borderRadius: '50%', background: '#353534', fontSize: 11 }}
             >
               +{parties.length - 4}
             </div>
           )}
         </div>
 
-        {/* Condition progress */}
+        {/* Progress */}
         {conditionTotal > 0 && (
           <div>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 6,
-              }}
-            >
-              <span style={{ fontSize: 12, color: '#6B7280' }}>
+            <div className="flex justify-between mb-1">
+              <span className="font-label-sm text-label-sm text-on-surface-variant">
                 {conditionFulfilled} of {conditionTotal} conditions met
               </span>
-              <span style={{ fontSize: 12, color: '#6B7280' }}>
-                {new Date(pact.updatedAt).toLocaleDateString()}
-              </span>
+              <span className="font-label-sm text-label-sm text-on-surface-variant">{pct}%</span>
             </div>
-            <div
-              style={{
-                background: '#242428',
-                borderRadius: 999,
-                height: 4,
-                overflow: 'hidden',
-              }}
-            >
+            <div className="rounded-full overflow-hidden" style={{ height: 3, background: '#353534' }}>
               <div
+                className="h-full rounded-full transition-all"
                 style={{
-                  background:
-                    pact.status === 'EXECUTED' ? '#22C55E' : '#D4FF4F',
-                  width: `${progressPct}%`,
-                  height: '100%',
-                  borderRadius: 999,
+                  width: `${pct}%`,
+                  background: pact.status === 'EXECUTED' ? '#c3f400' : '#abd600',
                 }}
               />
             </div>
           </div>
         )}
       </div>
-    </a>
+    </Link>
   )
 }
