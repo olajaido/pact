@@ -1,5 +1,6 @@
 import { auth } from '@/auth'
 import { fulfilConditionByParty } from '@/lib/db/queries/conditions'
+import { attemptPactExecution } from '@/lib/execution'
 import { AppError } from '@/lib/errors'
 import { z } from 'zod'
 
@@ -26,14 +27,22 @@ export async function POST(
   const { id: conditionId } = await params
 
   try {
-    const result = await fulfilConditionByParty(
+    // Step 1: Mark the condition as fulfilled (atomic, with OCC retry)
+    const { pactId } = await fulfilConditionByParty(
       conditionId,
       session.user.id,
       session.user.name ?? null,
       parsed.data,
     )
-    // pactExecuted wired up in Task 11
-    return Response.json({ ...result, pactExecuted: false })
+
+    // Step 2: Attempt atomic pact execution — no-op if any condition still pending.
+    // Runs outside the fulfilment transaction: each step is independently ACID.
+    const { executed, executionHash } = await attemptPactExecution(
+      pactId,
+      session.user.id,
+    )
+
+    return Response.json({ pactId, conditionId, pactExecuted: executed, executionHash })
   } catch (err) {
     if (err instanceof AppError) {
       return Response.json({ error: err.message }, { status: err.statusCode })
