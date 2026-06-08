@@ -3,8 +3,10 @@ import Resend from 'next-auth/providers/resend'
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import { db } from '@/lib/db'
 import { accounts, sessions, users, verificationTokens } from '@/lib/db/schema'
+import { authConfig } from './auth.config'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
@@ -20,10 +22,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           : 'onboarding@resend.dev',
     }),
   ],
-  pages: {
-    signIn: '/sign-in',
-    verifyRequest: '/verify',
-  },
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id

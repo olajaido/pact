@@ -1,5 +1,9 @@
-import { auth } from './auth'
+import NextAuth from 'next-auth'
+import { authConfig } from './auth.config'
 import { NextResponse } from 'next/server'
+
+// Use Edge-compatible config — no Node.js native modules in this import chain
+const { auth } = NextAuth(authConfig)
 
 const PUBLIC_PATHS = ['/', '/sign-in', '/verify']
 
