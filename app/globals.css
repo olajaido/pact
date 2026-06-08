@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+/* Material Symbols is loaded via <link> in layout.tsx — CSS @import is unreliable in Next.js */
 
 /* ── Vibrant Authority Design Tokens ─────────────────────── */
 @theme {
@@ -190,3 +190,47 @@
 }
 .input-underline:focus { border-bottom-color: #c3f400; }
 .input-underline::placeholder { color: #52525b; }
+
+/* ── Explicit Vibrant Authority colour utilities ─────────────
+   Defined here as a guarantee — Tailwind v4 @theme compilation
+   is not always reliable with Turbopack in development.       */
+@layer utilities {
+  /* Text colours */
+  .text-primary-fixed        { color: #c3f400; }
+  .text-primary-fixed-dim    { color: #abd600; }
+  .text-on-primary-fixed     { color: #161e00; }
+  .text-on-primary-fixed-variant { color: #3c4d00; }
+  .text-primary              { color: #ffffff; }
+  .text-on-surface           { color: #e5e2e1; }
+  .text-on-surface-variant   { color: #c4c9ac; }
+  .text-on-background        { color: #e5e2e1; }
+  .text-surface-tint         { color: #abd600; }
+  .text-outline              { color: #8e9379; }
+  .text-outline-variant      { color: #444933; }
+  .text-secondary            { color: #c8c6c5; }
+  .text-error                { color: #ffb4ab; }
+
+  /* Background colours */
+  .bg-background                    { background-color: #0A0A0A; }
+  .bg-surface                       { background-color: #131313; }
+  .bg-surface-container-lowest      { background-color: #0e0e0e; }
+  .bg-surface-container-low         { background-color: #1c1b1b; }
+  .bg-surface-container             { background-color: #201f1f; }
+  .bg-surface-container-high        { background-color: #2a2a2a; }
+  .bg-surface-container-highest     { background-color: #353534; }
+  .bg-primary-fixed                 { background-color: #c3f400; }
+  .bg-primary-container             { background-color: #c3f400; }
+  .bg-secondary-container           { background-color: #474746; }
+
+  /* Border colours */
+  .border-outline           { border-color: #8e9379; }
+  .border-outline-variant   { border-color: #444933; }
+  .border-primary-fixed     { border-color: #c3f400; }
+
+  /* Hover variants */
+  .hover\:text-primary-fixed:hover     { color: #c3f400; }
+  .hover\:text-error:hover             { color: #ffb4ab; }
+  .hover\:text-on-surface:hover        { color: #e5e2e1; }
+  .hover\:bg-surface-container-highest:hover { background-color: #353534; }
+  .hover\:border-outline-variant:hover { border-color: #444933; }
+}
