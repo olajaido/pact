@@ -5,27 +5,19 @@ import {
   Container,
   Section,
   Text,
+  Button,
   Hr,
   Preview,
   Font,
   Heading,
 } from '@react-email/components'
 
-interface InviteEmailProps {
-  pactTitle: string
-  creatorName: string
-  outcomeStatement: string
-  conditionTitle: string
-  acceptUrl: string
+interface MagicLinkEmailProps {
+  url: string
+  email: string
 }
 
-export function InviteEmail({
-  pactTitle,
-  creatorName,
-  outcomeStatement,
-  conditionTitle,
-  acceptUrl,
-}: InviteEmailProps) {
+export function MagicLinkEmail({ url, email }: MagicLinkEmailProps) {
   return (
     <Html>
       <Head>
@@ -40,9 +32,7 @@ export function InviteEmail({
           fontStyle="normal"
         />
       </Head>
-      <Preview>
-        {creatorName} has invited you to a Pact: {pactTitle}
-      </Preview>
+      <Preview>Sign in to Pact Protocol — your magic link is inside</Preview>
       <Body style={{ margin: 0, padding: 0, backgroundColor: '#0d0d0d' }}>
         <Container
           style={{
@@ -63,16 +53,18 @@ export function InviteEmail({
             <Text
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: 22,
+                fontSize: 24,
                 fontWeight: 700,
                 color: '#e5e2e1',
                 margin: 0,
+                letterSpacing: '-0.02em',
               }}
             >
               Pact Protocol
             </Text>
             <Text
               style={{
+                fontFamily: 'Arial, sans-serif',
                 fontSize: 10,
                 fontWeight: 700,
                 color: '#c3f400',
@@ -81,7 +73,7 @@ export function InviteEmail({
                 textTransform: 'uppercase',
               }}
             >
-              SECURE INVITATION
+              VERIFIED LEGAL NODE
             </Text>
           </Section>
 
@@ -90,112 +82,40 @@ export function InviteEmail({
             style={{
               backgroundColor: '#1a1a1a',
               border: '1px solid #2a2a2a',
-              padding: '40px',
+              padding: '48px 40px',
             }}
           >
-            {/* Who invited you */}
-            <Text
-              style={{
-                fontSize: 14,
-                color: '#a1a1aa',
-                margin: '0 0 8px',
-                lineHeight: 1.5,
-              }}
-            >
-              <strong style={{ color: '#c3f400' }}>{creatorName}</strong> has
-              invited you to commit to a Pact.
-            </Text>
-
-            {/* Pact title */}
             <Heading
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: 600,
                 color: '#e5e2e1',
                 margin: '0 0 16px',
                 letterSpacing: '-0.01em',
-                lineHeight: 1.2,
               }}
             >
-              {pactTitle}
+              Sign in to Pact
             </Heading>
-
-            {/* Outcome */}
-            <Section
-              style={{
-                backgroundColor: '#111111',
-                borderLeft: '3px solid #c3f400',
-                padding: '12px 16px',
-                marginBottom: 24,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: '#c3f400',
-                  margin: '0 0 4px',
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                OUTCOME IF EXECUTED
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: '#e5e2e1',
-                  margin: 0,
-                  lineHeight: 1.5,
-                }}
-              >
-                {outcomeStatement}
-              </Text>
-            </Section>
-
-            <Hr style={{ borderColor: '#2a2a2a', margin: '0 0 24px' }} />
-
-            {/* Their obligation */}
             <Text
               style={{
-                fontSize: 11,
-                fontWeight: 700,
+                fontFamily: 'Arial, sans-serif',
+                fontSize: 16,
                 color: '#a1a1aa',
-                margin: '0 0 8px',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
+                lineHeight: 1.6,
+                margin: '0 0 32px',
               }}
             >
-              YOUR OBLIGATION
+              Click the button below to sign in as{' '}
+              <span style={{ color: '#e5e2e1' }}>{email}</span>. This link
+              expires in <strong style={{ color: '#c3f400' }}>10 minutes</strong>.
             </Text>
-            <Section
-              style={{
-                backgroundColor: '#111111',
-                border: '1px solid #2a2a2a',
-                borderRadius: 6,
-                padding: '16px',
-                marginBottom: 32,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 700,
-                  color: '#e5e2e1',
-                  margin: 0,
-                  lineHeight: 1.4,
-                }}
-              >
-                {conditionTitle}
-              </Text>
-            </Section>
 
-            {/* CTA */}
+            {/* CTA Button — table-based for email client compatibility */}
             <table
               cellPadding={0}
               cellSpacing={0}
-              style={{ borderCollapse: 'collapse', marginBottom: 16 }}
+              style={{ borderCollapse: 'collapse', margin: '0 0 32px' }}
             >
               <tbody>
                 <tr>
@@ -207,39 +127,40 @@ export function InviteEmail({
                     }}
                   >
                     <a
-                      href={acceptUrl}
+                      href={url}
                       style={{
-                        fontSize: 13,
+                        fontFamily: 'Arial, sans-serif',
+                        fontSize: 14,
                         fontWeight: 700,
                         color: '#0a0a0a',
                         textDecoration: 'none',
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
                         display: 'block',
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      Review &amp; Accept Pact →
+                      Sign in to Pact Protocol →
                     </a>
                   </td>
                 </tr>
               </tbody>
             </table>
 
+            <Hr style={{ borderColor: '#2a2a2a', margin: '0 0 24px' }} />
+
             <Text
               style={{
+                fontFamily: 'Arial, sans-serif',
                 fontSize: 12,
                 color: '#52525b',
+                lineHeight: 1.6,
                 margin: 0,
               }}
             >
-              Or copy this link:{' '}
-              <a
-                href={acceptUrl}
-                style={{ color: '#c3f400', wordBreak: 'break-all' }}
-              >
-                {acceptUrl}
-              </a>
+              If the button above does not work, copy and paste this URL into
+              your browser:
+              <br />
+              <span style={{ color: '#c3f400', wordBreak: 'break-all' }}>{url}</span>
             </Text>
           </Section>
 
@@ -253,17 +174,17 @@ export function InviteEmail({
           >
             <Text
               style={{
+                fontFamily: 'Arial, sans-serif',
                 fontSize: 12,
                 color: '#52525b',
                 margin: 0,
                 lineHeight: 1.6,
               }}
             >
-              This invitation was sent via Pact Protocol. You are not obligated
-              to accept. If you did not expect this invitation, you can safely
-              ignore this email.
+              If you did not request this email, you can safely ignore it.
+              This link can only be used once.
               <br />
-              <br />© Pact Protocol · Backed by Aurora DSQL
+              <br />© Pact Protocol · Built on Aurora DSQL · AWS × Vercel
             </Text>
           </Section>
         </Container>
