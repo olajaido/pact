@@ -22,10 +22,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           : 'onboarding@resend.dev',
     }),
   ],
-  callbacks: {
-    session({ session, user }) {
-      session.user.id = user.id
-      return session
-    },
-  },
 })
