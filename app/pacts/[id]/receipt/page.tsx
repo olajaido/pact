@@ -195,18 +195,29 @@ export default async function ReceiptPage({
                     Note: {fulfilment.note}
                   </p>
                 )}
-                {fulfilment?.referenceUrl && (
-                  <p style={{ margin: '4px 0 0', fontSize: 13 }}>
-                    <a
-                      href={fulfilment.referenceUrl}
-                      style={{ color: '#D4FF4F' }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {fulfilment.referenceUrl}
-                    </a>
-                  </p>
-                )}
+                {fulfilment?.referenceUrl && (() => {
+                  // Only render safe http/https URLs — rejects javascript: and other schemes
+                  let safeUrl: string | null = null
+                  try {
+                    const u = new URL(fulfilment.referenceUrl)
+                    if (u.protocol === 'https:' || u.protocol === 'http:') {
+                      safeUrl = u.toString()
+                    }
+                  } catch { /* invalid URL — skip */ }
+
+                  return safeUrl ? (
+                    <p style={{ margin: '4px 0 0', fontSize: 13 }}>
+                      <a
+                        href={safeUrl}
+                        style={{ color: '#D4FF4F' }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {safeUrl}
+                      </a>
+                    </p>
+                  ) : null
+                })()}
               </div>
             ))}
           </div>
