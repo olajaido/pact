@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | grep -E '\\.(ts|tsx|js|jsx|json|css|md)$' | xargs -I{} npx prettier --write {} 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // empty'); if echo \"$FILE\" | grep -qE '\\.(ts|tsx)$'; then npx tsc --noEmit --pretty 2>&1 | tail -20 || true; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // empty'); if echo \"$FILE\" | grep -qE '\\.env(\\.local)?$'; then echo 'Blocked: never edit .env files directly. Use .env.local.example as reference only.' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'PACT CONTEXT REMINDER after compaction: (1) ALL write transactions must use withDsqlRetry() from lib/dsql-retry.ts — catches error codes 40001, OC000, OC001. (2) executions table has UNIQUE(pact_id) — one execution per Pact at DB level. (3) pacts.status follows strict state machine: DRAFT→PENDING_ACCEPTANCE→ACTIVE→EXECUTED. (4) SSE events go via kv.publish() on Vercel KV — never in-memory Map. (5) Audit log is append-only — no UPDATE or DELETE ever. (6) Auth sessions are in Aurora DSQL via Drizzle adapter.'"
+          }
+        ]
+      }
+    ]
+  }
+}
