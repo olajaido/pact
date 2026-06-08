@@ -326,7 +326,10 @@ export function PactDetailClient({ pactId, initialData }: Props) {
                       >
                         {entry.eventType.replace(/_/g, ' ')}
                       </span>
-                      <span className="text-[10px] text-on-surface-variant font-mono">
+                      <span
+                        className="text-[10px] text-on-surface-variant font-mono"
+                        suppressHydrationWarning
+                      >
                         {new Date(entry.createdAt).toLocaleTimeString()}
                       </span>
                     </div>
