@@ -6,7 +6,6 @@ interface ExecutionBannerProps {
 }
 
 export function ExecutionBanner({ visible, executedAt }: ExecutionBannerProps) {
-  const ts = executedAt ? new Date(executedAt).toLocaleString() : null
   return (
     <div
       style={{
@@ -36,8 +35,13 @@ export function ExecutionBanner({ visible, executedAt }: ExecutionBannerProps) {
         verified
       </span>
       PACT EXECUTED
-      {ts && (
-        <span style={{ fontWeight: 400, fontSize: 12, opacity: 0.75 }}>{ts}</span>
+      {executedAt && (
+        <span
+          style={{ fontWeight: 400, fontSize: 12, opacity: 0.75 }}
+          suppressHydrationWarning
+        >
+          {new Date(executedAt).toLocaleString()}
+        </span>
       )}
     </div>
   )
