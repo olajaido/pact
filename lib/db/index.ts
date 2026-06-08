@@ -1,26 +1,27 @@
-import { drizzle } from 'drizzle-orm/postgres-js'
-import postgres from 'postgres'
+import { AuroraDSQLPool } from '@aws/aurora-dsql-node-postgres-connector'
+import { awsCredentialsProvider } from '@vercel/oidc-aws-credentials-provider'
+import { attachDatabasePool } from '@vercel/functions/db-connections'
+import { drizzle } from 'drizzle-orm/node-postgres'
 import * as schema from './schema'
-import type { PostgresJsTransaction } from 'drizzle-orm/postgres-js'
-import type { ExtractTablesWithRelations } from 'drizzle-orm'
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set')
+if (!process.env.PGHOST || !process.env.AWS_REGION || !process.env.AWS_ROLE_ARN) {
+  throw new Error('Missing required env vars: PGHOST, AWS_REGION, AWS_ROLE_ARN')
 }
 
-// max:1 — Vercel serverless: one connection per function instance.
-// ssl:'verify-full' — verifies the server certificate against the system trust store
-// (which includes AWS CA certs on Vercel). Prevents MITM against Aurora DSQL.
-const client = postgres(process.env.DATABASE_URL, {
-  ssl: 'verify-full',
-  max: 1,
-  idle_timeout: 20,
-  connect_timeout: 10,
+const pool = new AuroraDSQLPool({
+  host: process.env.PGHOST,
+  region: process.env.AWS_REGION,
+  user: process.env.PGUSER || 'admin',
+  database: process.env.PGDATABASE || 'postgres',
+  port: Number(process.env.PGPORT || 5432),
+  customCredentialsProvider: awsCredentialsProvider({
+    roleArn: process.env.AWS_ROLE_ARN,
+    clientConfig: { region: process.env.AWS_REGION },
+  }),
 })
+attachDatabasePool(pool)
 
-export const db = drizzle(client, { schema })
+export const db = drizzle(pool, { schema })
 
-export type DbTransaction = PostgresJsTransaction<
-  typeof schema,
-  ExtractTablesWithRelations<typeof schema>
->
+// Driver-agnostic transaction type — inferred from db.transaction() signature
+export type DbTransaction = Parameters<Parameters<typeof db.transaction>[0]>[0]
