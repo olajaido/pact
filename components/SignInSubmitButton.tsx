@@ -9,21 +9,20 @@ export function SignInSubmitButton() {
     <button
       type="submit"
       disabled={pending}
+      className="w-full bg-primary-fixed text-on-primary-fixed font-bold py-3 rounded-full font-label-sm text-label-sm flex items-center justify-center gap-2 btn-hover transition-all active:scale-95"
       style={{
-        width: '100%',
-        background: pending ? '#242428' : '#D4FF4F',
-        color: pending ? '#6B7280' : '#0C0C0E',
-        padding: '14px 24px',
-        border: 'none',
-        borderRadius: 6,
-        fontWeight: 700,
-        fontSize: 15,
+        opacity: pending ? 0.6 : 1,
         cursor: pending ? 'not-allowed' : 'pointer',
-        transition: 'background 0.15s ease, color 0.15s ease',
-        fontFamily: 'inherit',
       }}
     >
-      {pending ? 'Sending…' : 'Send magic link'}
+      {pending ? (
+        'Sending…'
+      ) : (
+        <>
+          Send magic link
+          <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_forward</span>
+        </>
+      )}
     </button>
   )
 }

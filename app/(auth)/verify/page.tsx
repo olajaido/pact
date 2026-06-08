@@ -1,86 +1,55 @@
+import Link from 'next/link'
+
 export default function VerifyPage() {
   return (
     <main
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        padding: 24,
-        fontFamily: 'var(--font-sans), IBM Plex Sans, sans-serif',
-        textAlign: 'center',
-      }}
+      className="flex items-center justify-center min-h-screen px-margin-mobile text-center"
+      style={{ background: '#0A0A0A' }}
     >
       <div style={{ maxWidth: 440 }}>
-        {/* Icon */}
         <div
+          className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-8 text-primary-fixed font-bold"
           style={{
-            width: 56,
-            height: 56,
-            borderRadius: '50%',
-            background: 'rgba(212,255,79,0.1)',
-            border: '2px solid #D4FF4F',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 32px',
+            background: 'rgba(195,244,0,0.1)',
+            border: '2px solid #c3f400',
             fontSize: 24,
-            color: '#D4FF4F',
           }}
         >
           ✓
         </div>
 
         <h1
-          style={{
-            fontFamily: 'var(--font-heading), DM Serif Display, serif',
-            fontSize: 32,
-            fontWeight: 400,
-            color: '#F0EFE8',
-            margin: '0 0 16px',
-          }}
+          className="text-on-surface mb-4"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: 32, fontWeight: 600 }}
         >
           Check your email
         </h1>
         <p
-          style={{
-            color: '#6B7280',
-            fontSize: 16,
-            lineHeight: 1.6,
-            margin: '0 0 32px',
-          }}
+          className="font-body-lg text-on-surface-variant mb-8"
+          style={{ lineHeight: 1.6 }}
         >
-          We sent a magic link to your inbox. Click the link
-          to sign in — it expires in 10 minutes.
+          We sent a magic link to your inbox. Click the link to sign in — it expires in 10 minutes.
         </p>
 
         <div
-          style={{
-            background: '#141416',
-            border: '1px solid #242428',
-            borderRadius: 8,
-            padding: '16px 20px',
-            marginBottom: 32,
-          }}
+          className="rounded-xl p-4 mb-8"
+          style={{ background: '#201f1f', border: '1px solid rgba(68,73,51,0.3)' }}
         >
-          <p style={{ color: '#6B7280', fontSize: 13, margin: 0 }}>
+          <p className="font-body-md text-on-surface-variant">
             No email? Check your spam folder, or{' '}
-            <a
-              href="/sign-in"
-              style={{ color: '#D4FF4F', textDecoration: 'none' }}
-            >
-              try again with a different address
-            </a>
+            <Link href="/sign-in" className="text-primary-fixed font-bold hover:underline">
+              try again
+            </Link>
             .
           </p>
         </div>
 
-        <a
+        <Link
           href="/"
-          style={{ color: '#6B7280', fontSize: 13, textDecoration: 'none' }}
+          className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors"
         >
           ← Back to Pact
-        </a>
+        </Link>
       </div>
     </main>
   )
