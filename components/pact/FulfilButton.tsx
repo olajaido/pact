@@ -7,7 +7,7 @@ interface FulfilButtonProps {
   pactId: string
 }
 
-export function FulfilButton({ conditionId, pactId }: FulfilButtonProps) {
+export function FulfilButton({ conditionId }: FulfilButtonProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -23,9 +23,8 @@ export function FulfilButton({ conditionId, pactId }: FulfilButtonProps) {
       if (!res.ok) {
         const body = (await res.json()) as { error?: string }
         setError(body.error ?? 'Failed to fulfil condition')
-        return
       }
-      // SSE event drives the UI update in PactDetailClient — no reload needed
+      // SSE event drives the UI update in PactDetailClient
     } catch {
       setError('Network error')
     } finally {
@@ -38,22 +37,18 @@ export function FulfilButton({ conditionId, pactId }: FulfilButtonProps) {
       <button
         onClick={handleClick}
         disabled={loading}
-        style={{
-          background: '#D4FF4F',
-          color: '#0C0C0E',
-          padding: '8px 16px',
-          border: 'none',
-          borderRadius: 4,
-          cursor: loading ? 'not-allowed' : 'pointer',
-          opacity: loading ? 0.6 : 1,
-          fontWeight: 700,
-          fontSize: 13,
-        }}
+        className="bg-primary-fixed text-on-primary-fixed font-bold py-2 px-6 rounded-full font-label-sm text-label-sm glow-hover transition-all active:scale-95 flex items-center gap-2"
+        style={{ opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
       >
+        <span className="material-symbols-outlined" style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}>
+          {loading ? 'hourglass_empty' : 'check_circle'}
+        </span>
         {loading ? 'Marking…' : 'Mark as Fulfilled'}
       </button>
       {error && (
-        <p style={{ color: '#EF4444', marginTop: 4, fontSize: 12 }}>{error}</p>
+        <p className="font-label-sm text-label-sm mt-1" style={{ color: '#ffb4ab' }}>
+          {error}
+        </p>
       )}
     </div>
   )
