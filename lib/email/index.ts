@@ -5,9 +5,6 @@ export const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null
 
-// usepact.dev is the verified production domain.
-// Local dev uses Resend's shared test address (no domain verification needed).
+// usepact.dev is verified in Resend — used for all environments.
 export const FROM_ADDRESS =
-  process.env.NODE_ENV === 'production'
-    ? 'Pact Protocol <noreply@usepact.dev>'
-    : 'onboarding@resend.dev'
+  process.env.EMAIL_FROM ?? 'Pact Protocol <noreply@usepact.dev>'

@@ -8,10 +8,8 @@ import { accounts, sessions, users, verificationTokens } from '@/lib/db/schema'
 import { authConfig } from './auth.config'
 import { MagicLinkEmail } from '@/lib/email/templates/MagicLinkEmail'
 
-const FROM =
-  process.env.NODE_ENV === 'production'
-    ? 'Pact Protocol <noreply@usepact.dev>'
-    : 'onboarding@resend.dev'
+// usepact.dev is verified in Resend — used everywhere.
+const FROM = process.env.EMAIL_FROM ?? 'Pact Protocol <noreply@usepact.dev>'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
