@@ -1,5 +1,6 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 import { CreatePactForm } from '@/components/forms/CreatePactForm'
 
 export default async function NewPactPage() {
@@ -7,39 +8,49 @@ export default async function NewPactPage() {
   if (!session?.user?.id) redirect('/sign-in')
 
   return (
-    <div style={{ background: '#0C0C0E', minHeight: '100vh' }}>
-      <nav
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '0 32px',
-          height: 56,
-          borderBottom: '1px solid #242428',
-        }}
+    <div className="flex flex-col min-h-screen" style={{ background: '#0A0A0A' }}>
+      {/* Top nav */}
+      <header
+        className="sticky top-0 z-50 flex justify-between items-center px-margin-desktop py-stack-md"
+        style={{ background: '#131313', borderBottom: '1px solid rgba(68,73,51,0.3)' }}
       >
-        <a
-          href="/dashboard"
-          style={{
-            fontFamily: 'var(--font-heading), DM Serif Display, serif',
-            fontSize: 20,
-            color: '#F0EFE8',
-            textDecoration: 'none',
-          }}
+        <div
+          className="font-bold text-on-surface"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: 20 }}
         >
           Pact
-        </a>
-        <a
+        </div>
+        <nav className="hidden md:flex items-center gap-gutter">
+          <Link
+            href="/dashboard"
+            className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors"
+          >
+            Dashboard
+          </Link>
+          <span
+            className="font-label-sm text-label-sm text-primary-fixed"
+            style={{ borderBottom: '2px solid #c3f400', paddingBottom: 4 }}
+          >
+            Create
+          </span>
+        </nav>
+        <Link
           href="/dashboard"
-          style={{ color: '#6B7280', fontSize: 13, textDecoration: 'none' }}
+          className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors"
         >
           ← Dashboard
-        </a>
-      </nav>
-      <CreatePactForm
-        creatorEmail={session.user.email!}
-        creatorName={session.user.name ?? session.user.email ?? ''}
-      />
+        </Link>
+      </header>
+
+      <main
+        className="flex-grow flex flex-col items-center justify-start w-full mx-auto px-margin-mobile md:px-margin-desktop"
+        style={{ maxWidth: 1280, paddingTop: 48, paddingBottom: 48 }}
+      >
+        <CreatePactForm
+          creatorEmail={session.user.email!}
+          creatorName={session.user.name ?? session.user.email ?? ''}
+        />
+      </main>
     </div>
   )
 }
