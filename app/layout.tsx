@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
-import { DM_Serif_Display, IBM_Plex_Sans } from 'next/font/google'
+import { Playfair_Display, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 
-const dmSerifDisplay = DM_Serif_Display({
-  variable: '--font-heading',
+const playfairDisplay = Playfair_Display({
+  variable: '--font-display',
   subsets: ['latin'],
-  weight: '400',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
 
-const ibmPlexSans = IBM_Plex_Sans({
+const hankenGrotesk = Hanken_Grotesk({
   variable: '--font-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -22,19 +22,13 @@ export const metadata: Metadata = {
     'Multi-party commitment execution platform. Define obligations, all parties fulfil them, the outcome fires atomically. Backed by Aurora DSQL distributed ACID transactions.',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${dmSerifDisplay.variable} ${ibmPlexSans.variable}`}
+      className={`dark ${playfairDisplay.variable} ${hankenGrotesk.variable}`}
     >
-      <body style={{ background: '#0C0C0E', margin: 0, minHeight: '100vh' }}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
