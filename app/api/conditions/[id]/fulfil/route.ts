@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
 import { fulfilConditionByParty } from '@/lib/db/queries/conditions'
 import { attemptPactExecution } from '@/lib/execution'
+import { broadcastPactEvent } from '@/lib/sse'
 import { AppError } from '@/lib/errors'
 import { z } from 'zod'
 
@@ -27,7 +28,6 @@ export async function POST(
   const { id: conditionId } = await params
 
   try {
-    // Step 1: Mark the condition as fulfilled (atomic, with OCC retry)
     const { pactId } = await fulfilConditionByParty(
       conditionId,
       session.user.id,
@@ -35,12 +35,26 @@ export async function POST(
       parsed.data,
     )
 
-    // Step 2: Attempt atomic pact execution — no-op if any condition still pending.
-    // Runs outside the fulfilment transaction: each step is independently ACID.
+    // Broadcast CONDITION_FULFILLED — after DB commit, best-effort
+    void broadcastPactEvent(pactId, {
+      type: 'CONDITION_FULFILLED',
+      conditionId,
+      timestamp: new Date().toISOString(),
+    }).catch(console.error)
+
     const { executed, executionHash } = await attemptPactExecution(
       pactId,
       session.user.id,
     )
+
+    if (executed && executionHash) {
+      // Broadcast PACT_EXECUTED — after execution transaction commits
+      void broadcastPactEvent(pactId, {
+        type: 'PACT_EXECUTED',
+        executedAt: new Date().toISOString(),
+        executionHash,
+      }).catch(console.error)
+    }
 
     return Response.json({ pactId, conditionId, pactExecuted: executed, executionHash })
   } catch (err) {

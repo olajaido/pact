@@ -1,5 +1,6 @@
 import { auth } from '@/auth'
 import { acceptParty } from '@/lib/db/queries/pacts'
+import { broadcastPactEvent } from '@/lib/sse'
 import { AppError } from '@/lib/errors'
 import { z } from 'zod'
 
@@ -16,7 +17,6 @@ export async function POST(
     return Response.json({ error: 'Unauthorised' }, { status: 401 })
   }
 
-  // params is awaited but id isn't used — token uniquely identifies the party
   await params
 
   const parsed = acceptBody.safeParse(await req.json())
@@ -30,6 +30,21 @@ export async function POST(
       session.user.id,
       session.user.name ?? null,
     )
+
+    // Broadcast after DB commit — non-blocking, best-effort
+    void broadcastPactEvent(result.pactId, {
+      type: 'PARTY_ACCEPTED',
+      partyId: result.party.id,
+      timestamp: new Date().toISOString(),
+    }).catch(console.error)
+
+    if (result.pactStatus === 'ACTIVE') {
+      void broadcastPactEvent(result.pactId, {
+        type: 'PACT_ACTIVATED',
+        timestamp: new Date().toISOString(),
+      }).catch(console.error)
+    }
+
     return Response.json(result)
   } catch (err) {
     if (err instanceof AppError) {

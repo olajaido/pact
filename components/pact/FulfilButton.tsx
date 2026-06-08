@@ -25,8 +25,7 @@ export function FulfilButton({ conditionId, pactId }: FulfilButtonProps) {
         setError(body.error ?? 'Failed to fulfil condition')
         return
       }
-      // Phase 2: simple reload. Phase 3 will replace with SSE-driven update.
-      window.location.reload()
+      // SSE event drives the UI update in PactDetailClient — no reload needed
     } catch {
       setError('Network error')
     } finally {
