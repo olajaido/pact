@@ -6,7 +6,7 @@ import {
   conditions,
   auditLog,
 } from '@/lib/db/schema'
-import { eq, and, desc, asc, sql, inArray } from 'drizzle-orm'
+import { eq, and, desc, asc, sql, inArray, or, isNull } from 'drizzle-orm'
 import { withDsqlRetry } from '@/lib/dsql-retry'
 import { writeAuditInTx } from '@/lib/audit'
 import { AppError } from '@/lib/errors'
@@ -326,14 +326,20 @@ export interface PactSummary {
 export async function listPactsWithSummary(
   userId: string,
   status?: string,
+  userEmail?: string,
 ): Promise<PactSummary[]> {
+  // Match pacts where user is a linked party (userId) OR has a pending invite by email
+  const partyMatch = userEmail
+    ? or(
+        eq(parties.userId, userId),
+        and(eq(parties.email, userEmail.toLowerCase()), isNull(parties.userId)),
+      )
+    : eq(parties.userId, userId)
+
   const pactRows = await db
     .select({ pact: pacts })
     .from(pacts)
-    .innerJoin(
-      parties,
-      and(eq(parties.pactId, pacts.id), eq(parties.userId, userId)),
-    )
+    .innerJoin(parties, and(eq(parties.pactId, pacts.id), partyMatch))
     .where(status ? eq(pacts.status, status) : undefined)
     .orderBy(desc(pacts.updatedAt))
 

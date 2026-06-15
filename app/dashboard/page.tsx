@@ -22,7 +22,8 @@ export default async function DashboardPage({
   if (!session?.user?.id) redirect('/sign-in')
 
   const { status } = await searchParams
-  const summaries = await listPactsWithSummary(session.user.id, status)
+  // Pass email so pending invites (userId = null) also appear in the dashboard
+  const summaries = await listPactsWithSummary(session.user.id, status, session.user.email ?? undefined)
 
   return (
     <SidebarLayout>
@@ -147,7 +148,7 @@ export default async function DashboardPage({
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
             {summaries.map((s) => (
-              <PactCard key={s.pact.id} summary={s} />
+              <PactCard key={s.pact.id} summary={s} userEmail={session.user.email ?? undefined} />
             ))}
           </div>
         )}

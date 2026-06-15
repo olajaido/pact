@@ -2,8 +2,13 @@ import Link from 'next/link'
 import { PartyAvatar } from './PartyAvatar'
 import type { PactSummary } from '@/lib/db/queries/pacts'
 
-export function PactCard({ summary }: { summary: PactSummary }) {
+export function PactCard({ summary, userEmail }: { summary: PactSummary; userEmail?: string }) {
   const { pact, parties, conditionTotal, conditionFulfilled } = summary
+
+  // Is this an unaccepted invite (party record exists by email but userId not linked yet)?
+  const isUnacceptedInvite = userEmail
+    ? parties.some((p) => p.email.toLowerCase() === userEmail.toLowerCase() && p.userId === null)
+    : false
 
   const statusColor =
     pact.status === 'EXECUTED' ? '#c3f400'
@@ -33,6 +38,14 @@ export function PactCard({ summary }: { summary: PactSummary }) {
           >
             {pact.status}
           </span>
+          {isUnacceptedInvite && (
+            <span
+              className="font-label-sm text-label-sm rounded-full px-2 py-0.5"
+              style={{ background: 'rgba(171,214,0,0.15)', color: '#abd600', fontSize: 10 }}
+            >
+              INVITED
+            </span>
+          )}
           <span className="font-label-sm text-label-sm text-on-surface-variant opacity-60">
             {new Date(pact.updatedAt).toLocaleDateString()}
           </span>
