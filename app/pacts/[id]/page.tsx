@@ -6,10 +6,11 @@ import { SidebarLayout } from '@/components/navigation/SidebarLayout'
 import { AppError } from '@/lib/errors'
 import { db } from '@/lib/db'
 import { pacts, parties as partiesTable } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, and } from 'drizzle-orm'
 import { withDsqlRetry } from '@/lib/dsql-retry'
 import { writeAuditInTx } from '@/lib/audit'
 import { broadcastPactEvent } from '@/lib/sse'
+import { sendDeclineNotification } from '@/lib/email/send'
 import Link from 'next/link'
 
 export default async function PactDetailPage({
@@ -48,33 +49,45 @@ export default async function PactDetailPage({
     async function handleDecline(formData: FormData) {
       'use server'
       const inviteToken = formData.get('inviteToken') as string
-      const pactId = formData.get('pactId') as string
+      // Use `id` from URL params (server-validated) — NOT pactId from formData (user-controlled)
       const reason = (formData.get('reason') as string | null)?.trim() || 'Party declined the invitation'
       const currentSession = await auth()
       if (!currentSession?.user?.id) redirect('/sign-in')
 
       await withDsqlRetry(() =>
         db.transaction(async (tx) => {
-          const [party] = await tx.select().from(partiesTable).where(eq(partiesTable.inviteToken, inviteToken)).limit(1)
+          // Bind token to URL pact id AND session user — prevents IDOR
+          const [party] = await tx
+            .select()
+            .from(partiesTable)
+            .where(and(eq(partiesTable.inviteToken, inviteToken), eq(partiesTable.pactId, id)))
+            .limit(1)
           if (!party) throw new AppError('Invalid token', 404)
 
-          // Audit: party declined
+          const isOwner =
+            party.userId === currentSession.user.id ||
+            party.email.toLowerCase() === (currentSession.user.email ?? '').toLowerCase()
+          if (!isOwner) throw new AppError('Forbidden', 403)
+
+          const [pactRecord] = await tx.select().from(pacts).where(eq(pacts.id, id)).limit(1)
+          if (!pactRecord || pactRecord.status !== 'PENDING_ACCEPTANCE') {
+            throw new AppError('Pact cannot be declined at this stage', 400)
+          }
+
           await writeAuditInTx(tx, {
-            pactId,
+            pactId: id,
             eventType: 'VOID_PROPOSED',
             actorId: currentSession.user.id,
             actorLabel: currentSession.user.name ?? currentSession.user.email ?? 'Party',
             payload: { action: 'PARTY_DECLINED', email: party.email, reason },
           })
 
-          // Void the pact
           await tx.update(pacts)
             .set({ status: 'VOID', voidedAt: new Date(), updatedAt: new Date() })
-            .where(eq(pacts.id, pactId))  // pacts = schema table, no conflict
+            .where(eq(pacts.id, id))
 
-          // Audit: pact voided
           await writeAuditInTx(tx, {
-            pactId,
+            pactId: id,
             eventType: 'PACT_VOIDED',
             actorId: null,
             actorLabel: 'system',
@@ -83,7 +96,16 @@ export default async function PactDetailPage({
         }),
       )
 
-      void broadcastPactEvent(pactId, { type: 'PACT_VOIDED', timestamp: new Date().toISOString() }).catch(console.error)
+      void broadcastPactEvent(id, { type: 'PACT_VOIDED', timestamp: new Date().toISOString() }).catch(console.error)
+
+      // Email creator and other parties: who declined and why
+      void sendDeclineNotification(
+        id,
+        currentSession.user.email ?? '',
+        currentSession.user.name ?? currentSession.user.email ?? 'Party',
+        reason,
+      ).catch(console.error)
+
       redirect('/dashboard')
     }
 

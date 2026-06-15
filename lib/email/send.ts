@@ -3,6 +3,7 @@ import { resend, FROM_ADDRESS } from './index'
 import { InviteEmail } from './templates/InviteEmail'
 import { FulfilledEmail } from './templates/FulfilledEmail'
 import { ExecutedEmail } from './templates/ExecutedEmail'
+import { DeclineEmail } from './templates/DeclineEmail'
 import { db } from '@/lib/db'
 import { parties, conditions, pacts, conditionFulfilments } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
@@ -136,6 +137,51 @@ export async function sendExecutionEmails(
       from: FROM_ADDRESS,
       to: party.email,
       subject: `Pact executed: ${pact.title}`,
+      html,
+    })
+  }
+}
+
+/** Notify the creator (and all accepted parties) when a party declines. */
+export async function sendDeclineNotification(
+  pactId: string,
+  declinedByEmail: string,
+  declinedByName: string,
+  reason?: string,
+): Promise<void> {
+  if (!resend) return
+
+  const [pactRows, partyList] = await Promise.all([
+    db.select().from(pacts).where(eq(pacts.id, pactId)).limit(1),
+    db.select().from(parties).where(eq(parties.pactId, pactId)),
+  ])
+
+  const pact = pactRows[0]
+  if (!pact) return
+
+  const url = appUrl()
+
+  // Notify all OTHER parties (not the one who declined)
+  const recipients = partyList.filter(
+    (p) => p.email.toLowerCase() !== declinedByEmail.toLowerCase() && p.email,
+  )
+
+  for (const party of recipients) {
+    const html = await render(
+      DeclineEmail({
+        pactTitle: pact.title,
+        declinedByName,
+        declinedByEmail,
+        reason,
+        pactId,
+        appUrl: url,
+      }),
+    )
+
+    await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: party.email,
+      subject: `Pact declined: ${pact.title}`,
       html,
     })
   }
