@@ -173,6 +173,7 @@ export async function submitPact(
 export async function getPactById(
   pactId: string,
   userId: string | null,
+  userEmail?: string,
 ): Promise<PactDetail | null> {
   const [pact] = await db
     .select()
@@ -200,9 +201,10 @@ export async function getPactById(
       .orderBy(asc(auditLog.createdAt)),
   ])
 
-  const currentParty = userId
-    ? (partyList.find((p) => p.userId === userId) ?? null)
-    : null
+  // Find current party by userId first, then fall back to email match for pending invites
+  const currentParty =
+    (userId ? partyList.find((p) => p.userId === userId) : null)
+    ?? (userEmail ? partyList.find((p) => p.email.toLowerCase() === userEmail.toLowerCase()) ?? null : null)
 
   return {
     pact,
