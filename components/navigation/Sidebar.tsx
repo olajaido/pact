@@ -6,10 +6,9 @@ import { signOut } from 'next-auth/react'
 
 const NAV_ITEMS = [
   { href: '/dashboard', icon: 'dashboard', label: 'Overview' },
-  { href: '/pacts', icon: 'description', label: 'My Pacts' },
-  { href: '/network', icon: 'hub', label: 'Network' },
-  { href: '/audit', icon: 'history_edu', label: 'Audit Trail' },
-  { href: '/settings', icon: 'settings', label: 'Settings' },
+  { href: '/dashboard', icon: 'description', label: 'My Pacts' },
+  { href: '/dashboard', icon: 'hub', label: 'Network' },
+  { href: '/dashboard', icon: 'history_edu', label: 'Audit Trail' },
 ] as const
 
 interface SidebarProps {
@@ -19,10 +18,10 @@ interface SidebarProps {
 export function Sidebar({ userName }: SidebarProps) {
   const pathname = usePathname()
 
-  function isActive(href: string) {
-    if (href === '/dashboard') return pathname === '/dashboard'
-    if (href === '/pacts') return pathname.startsWith('/pacts') && !pathname.startsWith('/pacts/new')
-    return pathname === href
+  function isActive(label: string) {
+    if (label === 'Overview') return pathname === '/dashboard'
+    if (label === 'My Pacts') return pathname.startsWith('/pacts') && !pathname.startsWith('/pacts/new')
+    return false
   }
 
   return (
@@ -64,10 +63,10 @@ export function Sidebar({ userName }: SidebarProps) {
       {/* Nav */}
       <nav className="flex-1 px-2 space-y-1">
         {NAV_ITEMS.map((item) => {
-          const active = isActive(item.href)
+          const active = isActive(item.label)
           return (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="flex items-center gap-3 px-3 py-2 rounded transition-all"
               style={{
