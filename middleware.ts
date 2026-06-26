@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 // Use Edge-compatible config — no Node.js native modules in this import chain
 const { auth } = NextAuth(authConfig)
 
-const PUBLIC_PATHS = ['/', '/sign-in', '/verify', '/privacy', '/terms', '/demo']
+const PUBLIC_PATHS = ['/', '/sign-in', '/verify', '/privacy', '/terms', '/demo', '/demo2']
 
 const PUBLIC_PATTERNS = [
   /^\/pacts\/[^/]+\/accept$/,
